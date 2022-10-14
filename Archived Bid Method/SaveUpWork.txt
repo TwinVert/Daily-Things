@@ -1,0 +1,142 @@
+﻿Escape::
+ExitApp
+Return
+
+NumpadEnter::
+FormatTime, CurrentDateTime,, MM/dd/yy
+FormatTime, SpecialTime,, MMddyy
+
+
+
+Websites = https://www.upwork.com/
+
+
+Loop, parse, Websites, `,
+{
+Sleep, 3000
+MouseClick, left, 1021, 54, 3
+Sleep, 1000
+Send, %A_LoopField%
+Sleep, 1000
+Send, {ENTER}
+
+Random, rand, 10000, 15000
+Sleep, %rand%
+
+
+
+MouseClick, left,  1332,  131
+Sleep, 1000
+Send, twinvert{SHIFTDOWN}{SHIFTUP}{SHIFTDOWN}2{SHIFTUP}gmail.com
+MouseClick, left,  934,  443
+Sleep, 1000
+Sleep, 1000
+Send, {SHIFTDOWN}u{SHIFTUP}p{SHIFTDOWN}w{SHIFTUP}ork405
+
+MouseClick, left,  941,  468
+Random, rand, 10000, 15000
+Sleep, %rand%
+}
+
+return
+
+
+
+
+MouseClickDrag, left, 1021,  54, 125,  58
+Send, {CTRLDOWN}c{CTRLUP}
+Website=%clipboard%
+if (Website = "http://www.coloradobids.net/search_bids.php") {
+State=Colorado
+}
+if (Website = "http://www.utahbids.net/search_bids.php") {
+State=Utah
+}
+if (Website = "http://www.kansasbids.com/search_bids.php") {
+State=Kansas
+}
+if (Website = "http://www.kentuckybids.com/search_bids.php") {
+State=Kentucky
+}
+if (Website = "http://www.nebraskabids.com/search_bids.php") {
+State=Nebraska
+}
+if (Website = "http://www.nevadabids.com/search_bids.php") {
+State=Nevada
+}
+if (Website = "http://www.southdakotabids.com/search_bids.php") {
+State=SouthDakota
+}
+if (Website = "http://www.wyomingbids.com/search_bids.php") {
+State=Wyoming
+}
+
+
+
+Sleep, 3000
+MouseClick, left,  705,  316
+Sleep, 1000
+Send, {TAB 4}
+SendInput %CurrentDateTime%
+Sleep, 1000
+Send, {TAB}
+Sleep, 1000
+Send, 01/01/20
+Send, {TAB 3}
+Sleep, 1000
+
+Searches = GIS,web,map,restoration,ecolog,biolog,vegetation,trails,open space,wildlife,forest,biosamp,birds,orni,Agriculture,geospatial,spatial,environmental
+Sort, Searches, Random D,
+
+Loop, parse, Searches, `, 
+{
+search=%A_LoopField%
+Sleep, 1000
+Send, %A_LoopField% ; THIS IS A VERY IMPORTANT LINE THAT NEEDS TO BE SORTED AND CORRECTED
+Random, rand, 2000, 15000
+Sleep, %rand%
+
+Send, {TAB 3}
+Sleep, 300
+Send, {ENTER}
+Sleep, 3000
+
+Send, {CTRLDOWN}a{CTRLUP}
+Send, {CTRLDOWN}c{CTRLUP}
+Current = %clipboard%
+
+Sleep, 300
+Send +{TAB 3}
+
+Bad := "No result"
+
+if (InStr(Current, Bad)) {
+continue
+}
+
+Sleep, 1000
+Send, {CTRLDOWN}s{CTRLUP}
+Random, rand, 2000, 4000
+Sleep, %rand%
+
+MouseClick, left,  1585,  48
+Sleep, 1000
+Send, {CTRLDOWN}a{CTRLUP}{ENTER}
+Sleep, 500
+Send, {BACKSPACE}
+Random, rand, 2000, 4000
+Sleep, %rand%
+Send, C:\Users\Twinv\Desktop\Bids\Day1\%State%
+Random, rand, 2000, 4000
+Sleep, %rand%
+MouseClick, left,  1181,  935
+Sleep, 1000
+Send, {CTRLDOWN}a{CTRLUP}
+Send, %search%_%SpecialTime%_%State%
+Send, {ENTER}
+Random, rand, 4000, 5000
+Sleep, %rand%
+}}
+
+return
+
